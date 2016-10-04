@@ -4,9 +4,9 @@ $users = @()
 $rawusers = Import-Csv .\rawusers.csv
 
 $rawusers | ForEach-Object{
-    $user = Get-ADUser $_.username -Properties Mobile
+    $user = Get-ADUser $_.username -Properties Mobile,emailaddress
     $users += $user
     }
 
 
-$users | select -property @{name="username";expression={$($_.samaccountname)}}, @{name="realname";expression={$($_.name)}}, @{name="email";expression={$($_.userprincipalname)}},@{name="phone";expression={$($_.mobile)}},@{name="platform";expression={""}} | export-csv duousers.csv -NoTypeInformation
+$users | select -property @{name="username";expression={$($_.samaccountname)}}, @{name="realname";expression={$($_.name)}}, @{name="email";expression={$($_.emailaddress)}},@{name="phone";expression={$($_.mobile)}},@{name="platform";expression={""}} | export-csv duousers.csv -NoTypeInformation
