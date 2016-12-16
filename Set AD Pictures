@@ -1,0 +1,26 @@
+$pics = ls *.jpg | select name, fullname
+
+$pics | foreach-object{
+  $fullname = ($_.name).split('\.')[-2]
+  $fullname = $fullname.split(',')
+  $firstname = $fullname[1].trim()
+  $lastname = $fullname[0].trim()
+  $fullname = $firstname + ' ' + $lastname
+  $user = Get-ADUser -Filter {Name -eq $fullname} -properties ThumbnailPhoto, Name, samaccountname| select Name, ThumbnailPhoto, Samaccountname
+  if ($user.ThumbnailPhoto){
+    Write-Host SKIPPED: $user.name already has a photo set.
+    Return
+  }else{
+    Write-Host Setting a photo for $user.fullname
+    $photo = [byte[]](Get-Content $_.Fullname -Encoding byte)
+    Set-ADUser $user.samaccountname -Replace @{thumbnailPhoto=$photo}
+  
+    $user = Get-ADUser -Filter {Name -eq $fullname} -properties ThumbnailPhoto, Name, samaccountname| select Name, ThumbnailPhoto, Samaccountname
+    if ($user.ThumbnailPhoto){
+      Write-Host $user.name s photo has successfully set. 
+     break
+    }else{
+      Write-Host Warning: Failed to set a photo for $user.name
+    }
+  }
+}
