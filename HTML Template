@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style type="text/css">
+			body {
+					font-family: arial}
+			h1 {
+				padding-top: 25px;
+			}
+			.content {margin-left: auto;
+					margin-right: auto;
+					width: 80%;
+					text-align: center;
+					background-color: #6bb445;
+					width: 600px;
+					height: 500px;
+					box-sizing: border-box;
+					border-radius: 25px;
+					box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+				}
+
+			.heddy {font-size: 1.1em;
+					font-weight: bold;
+					text-shadow: 2px 2px 5px black;
+						color:white;}
+			.big {font-size: 2em}
+			.data {font-weight: bold;}
+	</style>
+</head>
+
+<body>
+
+	<div class="content ">
+	<h1 class="heddy big">%USERNAME% </h1>
+
+	<div class="data">remoted into</div>
+	<h2 class="heddy big">%SERVER%</h2>
+
+	<p class="heddy">Logon Type</p><span class="data">10</span>
+	<p class="heddy">Source IP Address</p><span class="data">%IP%</span>
+	<p class="heddy">Event created </p><span class="data">01/03/2017 14:49:04</span>
+	<p class="heddy">Email triggered to send </p><span class="data">01/03/2017 14:49:07</span>
+	</div>
+</body>
+
+</html>
